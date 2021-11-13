@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Chatterbox</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="themes/base.css">
+    <link rel="stylesheet" id="theme" href="themes/default/style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script>
+      const url = 'ws://uno:8080';
+      var preferences = {"theme": "default", "notification": "on"};
+      var cookies = decodeURIComponent(document.cookie).split('; ');
+      for (let i = 0; i < cookies.length; i++) {
+        let key = cookies[i].split('=')[0];
+        let value = cookies[i].split('=')[1];
+        preferences[key] = value;
+      }
+      console.log(`Preferences = ${JSON.stringify(preferences)}`);
+      
+      const ws = new WebSocket(url);
+      ws.onopen = (event) => {
+        console.log(`Connected to: ${url}`);
+        document.getElementById('connection').className="connection-on";
+        document.getElementById('join').disabled = false;
+      }
+
+      ws.onclose = (event) => {
+        document.getElementById('connection').className="connection-off";
+      }
+
+      ws.addEventListener('message', event => {
+        console.log(event.data);
+        document.getElementById('rx').scrollTop = document.getElementById('rx').scrollHeight;
+        document.getElementById('rx').value += event.data + '\r\n';
+        playNotification();
+      });
+
+      function saveName(name) {
+        preferences.name = name;
+        document.cookie = `name=${name}; expires=Fri, 01 Jan 2038 00:00:00 UTC; SameSite=Strict`;
+      }
+
+      function recallName() {
+        if (preferences.name) {
+          document.getElementById('name').value = preferences.name;
+        }
+      }
+
+      function setNotification(state) {
+        preferences.notification = state;
+        document.getElementById('notification').className = `notification-${state}`;
+        document.cookie = `notification=${state}; expires=Fri, 01 Jan 2038 00:00:00 UTC; SameSite=Strict`;
+      }
+
+      function toggleNotification() {
+        if (preferences.notification == 'on') {
+          setNotification('off');
+        }
+        else {
+          setNotification('on');
+        }
+      }
+
+      function playNotification() {
+        if (preferences.notification == "on") {
+          var audio = new Audio(`themes/${preferences.theme}/notify.wav`);
+          audio.play();
+        }
+      }
+
+      function setTheme(theme) {
+        preferences.theme = theme;
+        document.getElementById('theme').href = `themes/${theme}/style.css`;
+        document.cookie = `theme=${theme}; expires=Fri, 01 Jan 2038 00:00:00 UTC; SameSite=Strict`;
+      }
+
+      function toggleTheme() {
+        if (preferences.theme.includes('default')) {
+          setTheme('arctic');
+        }
+        else if (preferences.theme.includes('arctic')) {
+          setTheme('material-dark');
+        }
+        else if (preferences.theme.includes('dark')) {
+          setTheme('hacker');
+        }
+        else {
+          setTheme('default');
+        }
+      }
+
+      function send(message) {
+        if (document.getElementById('name').value) {
+          ws.send(`${document.getElementById('name').value}: ${message}`);
+          document.getElementById('tx').value = '';
+          document.getElementById('tx').focus();
+        }
+      }
+
+      function login() {
+        ws.send(`${document.getElementById('name').value} just joined.`);
+        document.getElementById('send').disabled = false;
+        document.getElementById('tx').focus();
+      }
+    </script>
+  </head>
+
+  <body onload="recallName(); setNotification(preferences.notification);">
+    <script>setTheme(preferences.theme);</script>
+    <form action="javascript:send(document.getElementById('tx').value);">
+      <div>
+        <input id="name" onfocus="this.select();" onchange="saveName(this.value);" placeholder="your name">
+        <button id="join" onclick="login(document.getElementById('name').value);" type="button" disabled>Join</button>
+        <span id="controls">
+          <span id="notification" class="notification-on" onclick="toggleNotification();"><!-- CSS background image in theme's style.css --></span>
+          <span id="theme" onclick="toggleTheme();"><!-- CSS background image in theme's style.css --></span>
+          <span id="connection" class="connection-off"><!-- CSS background image in theme's style.css --></span>
+        </span>
+      </div>
+      <div style="margin-top: 1em;">  <!-- using margin, because a <br> is too much space -->
+        <textarea id="rx" cols="40" rows="20" readonly></textarea><br>
+        <input id="tx" type="text" autocomplete="off">
+        <button id="send" type="submit" disabled>Send</button>
+      </div>
+    </form>
+  </body>
+</html>
+

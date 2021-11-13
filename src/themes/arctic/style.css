@@ -1,0 +1,41 @@
+body {
+  background-color: whitesmoke;
+  color: dimgray;
+}
+button {
+  width: 7em;
+}
+form {
+  background-color: white;
+  border: 1px solid black;
+}
+.connection-on {
+  background-image: url('connection-on.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+.connection-off {
+  background-image: url('connection-off.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+.notification-on {
+  background-image: url('notification-on.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+.notification-off {
+  background-image: url('notification-off.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+#theme {
+  background-image: url('settings.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}

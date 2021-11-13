@@ -1,0 +1,57 @@
+body {
+  font-family: calibri, sans-serif;
+  background-color: black;
+  color: #bc4764;
+}
+button {
+  font-family: calibri, sans-serif;
+  border: 2px solid #6a7fc7;
+  background-color:  #4764bc;
+  color: #b7b7b7;
+}
+form {
+  font-family: calibri, sans-serif;
+  background-color: #212121;
+  border: 2px solid #373737;
+}
+fieldset {
+  font-family: calibri, sans-serif;
+  border: 2px solid black;
+  color: black;
+}
+input, textarea {
+  font-family: calibri, sans-serif;
+  background-color: #292929;
+  border: 2px solid #373737;
+  color: #b7b7b7;
+}
+.connection-on {
+  background-image: url('connection-on.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+.connection-off {
+  background-image: url('connection-off.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+.notification-on {
+  background-image: url('notification-on.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+.notification-off {
+  background-image: url('notification-off.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+#theme {
+  background-image: url('settings.svg');
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}

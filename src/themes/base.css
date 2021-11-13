@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 50em;
+}
+button {
+  border: 1px solid;
+  border-radius: 3px;
+  width: 7em;
+}
+form {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 1em;
+}
+input, textarea {
+  border: 1px solid;
+  border-radius: 3px;
+}
+#controls {
+  float: right;
+}
+#notification, #theme {
+  cursor: pointer;
+}
+#rx {
+  height: 85vh;
+  width: 100%;
+}
+#tx {
+  width: calc(100% - 7.25em);
+}
+#send {
+  float: right;
+}
