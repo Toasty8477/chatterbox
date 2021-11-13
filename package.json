@@ -14,7 +14,12 @@
   "keywords": [],
   "author": {
     "name": "Alex Horton",
-    "email": "alexhorton250@gmail.com"
+    "email": "alexhorton250@gmail.com",
+  "build": {
+    "win": {
+      "icon": "build/icon.png"
+    }
+  }
   },
   "license": "MIT",
   "config": {
