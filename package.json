@@ -1,7 +1,7 @@
 {
   "name": "chatterbox",
   "productName": "chatterbox",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
@@ -15,11 +15,11 @@
   "author": {
     "name": "Alex Horton",
     "email": "alexhorton250@gmail.com",
-  "build": {
-    "win": {
-      "icon": "build/icon.png"
+    "build": {
+      "win": {
+        "icon": "build/icon.png"
+      }
     }
-  }
   },
   "license": "MIT",
   "config": {
