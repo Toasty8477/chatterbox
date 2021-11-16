@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu} = require('electron');
+const { app, BrowserWindow, Tray, Menu } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -26,7 +26,7 @@ app.whenReady().then(() => {
     { label: 'Show App', click: function() {mainWindow.show()} },
     { label: 'Quit', click: function() {app.isQuiting = true; app.quit()}},
   ])
-  tray.setToolTip('This is my application.')
+  tray.setToolTip('Chatter Box')
   tray.setContextMenu(contextMenu)
 })
 
@@ -42,11 +42,11 @@ app.on('ready', createWindow);
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
+//app.on('window-all-closed', () => {
+//  if (process.platform !== 'darwin') {
+//    app.quit();
+//  }
+//});
 
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
